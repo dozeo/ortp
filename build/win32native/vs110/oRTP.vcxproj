@@ -55,7 +55,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\..\win32-bin\include;..\..\..\include;..\..\..\include\ortp;..\..\..\src;..\..\..\build\win32native\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;ORTP_INET6;WIN32;_DEBUG;_WINDOWS;_USRDLL;ORTP_EXPORTS;WINDOW_NATIVE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
@@ -66,8 +66,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>Ws2_32.lib;delayimp.lib;Winmm.lib;qwave.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(IntDir)ortp.dll</OutputFile>
-      <AdditionalLibraryDirectories>..\..\..\..\win32-bin\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <OutputFile>$(OutDir)ortp.dll</OutputFile>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <ModuleDefinitionFile />
       <DelayLoadDLLs>Qwave.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
