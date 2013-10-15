@@ -298,7 +298,7 @@ ORTP_PUBLIC int rtp_session_set_remote_addr_and_port (RtpSession * session, cons
 ORTP_PUBLIC int rtp_session_set_remote_addr(RtpSession *session,const char *addr, int port);
 /* alternatively to the set_remote_addr() and set_local_addr(), an application can give
 a valid socket (potentially connect()ed )to be used by the RtpSession */
-ORTP_PUBLIC void rtp_session_set_sockets(RtpSession *session, int rtpfd, int rtcpfd);
+ORTP_PUBLIC void rtp_session_set_sockets(RtpSession *session, int rtpfd, int rtcpfd, bool_t set_as_connected);
 ORTP_PUBLIC void rtp_session_set_transports(RtpSession *session, RtpTransport *rtptr, RtpTransport *rtcptr);
 
 /*those methods are provided for people who wants to send non-RTP messages using the RTP/RTCP sockets */

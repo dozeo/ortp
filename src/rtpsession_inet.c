@@ -878,15 +878,25 @@ rtp_session_set_remote_addr_and_port(RtpSession * session, const char * addr, in
 	return rtp_session_set_remote_addr_full(session,addr,rtp_port,addr,rtcp_port);
 }
 
-void rtp_session_set_sockets(RtpSession *session, int rtpfd, int rtcpfd)
+void rtp_session_set_sockets(RtpSession *session, int rtpfd, int rtcpfd, bool_t set_as_connected)
 {
 	if (rtpfd!=-1) set_non_blocking_socket(rtpfd);
 	if (rtcpfd!=-1) set_non_blocking_socket(rtcpfd);
 	session->rtp.socket=rtpfd;
 	session->rtcp.socket=rtcpfd;
-	if (rtpfd!=-1 || rtcpfd!=-1 )
-		session->flags|=(RTP_SESSION_USING_EXT_SOCKETS|RTP_SOCKET_CONNECTED|RTCP_SOCKET_CONNECTED);
-	else session->flags&=~(RTP_SESSION_USING_EXT_SOCKETS|RTP_SOCKET_CONNECTED|RTCP_SOCKET_CONNECTED);
+
+	if (rtpfd!=-1 || rtcpfd!=-1)
+	{
+		session->flags |= RTP_SESSION_USING_EXT_SOCKETS;
+
+		if (set_as_connected)
+			session->flags |= (RTP_SOCKET_CONNECTED | RTCP_SOCKET_CONNECTED);
+	}
+	else
+	{
+		// on resetting sockets always flag the session as disconnected
+		session->flags &= ~(RTP_SESSION_USING_EXT_SOCKETS | RTP_SOCKET_CONNECTED | RTCP_SOCKET_CONNECTED);
+	}
 }
 
 void rtp_session_set_transports(RtpSession *session, struct _RtpTransport *rtptr, struct _RtpTransport *rtcptr)
