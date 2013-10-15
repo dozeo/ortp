@@ -19,12 +19,18 @@
 
 
 #ifdef _MSC_VER
-#include "ortp-config-win32.h"
+# include "ortp-config-win32.h"
 #elif HAVE_CONFIG_H
-#include "ortp-config.h"
+# include "ortp-config.h"
 #endif
 #include "ortp/ortp.h"
-#include <inttypes.h>
+#ifdef _MSC_VER
+# define PRId64 "%lld"
+# define PRId64CAST(_X) ((long long)(_X))
+#else
+# include <inttypes.h>
+# define PRId64CAST(_X) (_X)
+#endif
 #include "scheduler.h"
 
 rtp_stats_t ortp_global_stats;
@@ -168,15 +174,15 @@ void rtp_stats_display(const rtp_stats_t *stats, const char *header) {
 	ortp_log(ORTP_MESSAGE, "===========================================================");
 	ortp_log(ORTP_MESSAGE, "%s", header);                
 	ortp_log(ORTP_MESSAGE, "-----------------------------------------------------------");
-	ortp_log(ORTP_MESSAGE, "sent                          %20"PRId64" packets", stats->packet_sent);
-	ortp_log(ORTP_MESSAGE, "                              %20"PRId64" bytes  ", stats->sent);
-	ortp_log(ORTP_MESSAGE, "received                      %20"PRId64" packets", stats->packet_recv);
-	ortp_log(ORTP_MESSAGE, "                              %20"PRId64" bytes  ", stats->hw_recv);
-	ortp_log(ORTP_MESSAGE, "incoming delivered to the app %20"PRId64" bytes  ", stats->recv);
-	ortp_log(ORTP_MESSAGE, "lost                          %20"PRId64" packets", stats->cum_packet_loss);
-	ortp_log(ORTP_MESSAGE, "received too late             %20"PRId64" packets", stats->outoftime);        
-	ortp_log(ORTP_MESSAGE, "bad formatted                 %20"PRId64" packets", stats->bad);
-	ortp_log(ORTP_MESSAGE, "discarded (queue overflow)    %20"PRId64" packets", stats->discarded);       
+	ortp_log(ORTP_MESSAGE, "sent                          %20"PRId64" packets", PRId64CAST(stats->packet_sent));
+	ortp_log(ORTP_MESSAGE, "                              %20"PRId64" bytes  ", PRId64CAST(stats->sent));
+	ortp_log(ORTP_MESSAGE, "received                      %20"PRId64" packets", PRId64CAST(stats->packet_recv));
+	ortp_log(ORTP_MESSAGE, "                              %20"PRId64" bytes  ", PRId64CAST(stats->hw_recv));
+	ortp_log(ORTP_MESSAGE, "incoming delivered to the app %20"PRId64" bytes  ", PRId64CAST(stats->recv));
+	ortp_log(ORTP_MESSAGE, "lost                          %20"PRId64" packets", PRId64CAST(stats->cum_packet_loss));
+	ortp_log(ORTP_MESSAGE, "received too late             %20"PRId64" packets", PRId64CAST(stats->outoftime));        
+	ortp_log(ORTP_MESSAGE, "bad formatted                 %20"PRId64" packets", PRId64CAST(stats->bad));
+	ortp_log(ORTP_MESSAGE, "discarded (queue overflow)    %20"PRId64" packets", PRId64CAST(stats->discarded));       
 	ortp_log(ORTP_MESSAGE, "===========================================================");
 }
 
