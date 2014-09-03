@@ -18,7 +18,6 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 list(APPEND srcs
 	"src/avprofile.c"
 	"src/b64.c"
-	"src/dll_entry.c"
 	"src/event.c"
 	"src/jitterctl.c"
 	"src/logging.c"
@@ -96,6 +95,9 @@ else()
 endif()
 
 if(WIN32)
+	list(APPEND srcs
+		"src/dll_entry.c")
+
 	list(APPEND system_libs
 		"wsock32"
 		"ws2_32"
@@ -113,3 +115,4 @@ set_target_properties(ortp PROPERTIES
 	INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/include"
 	)
 target_link_libraries(ortp ${system_libs})
+
