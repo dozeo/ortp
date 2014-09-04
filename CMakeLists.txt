@@ -251,7 +251,7 @@ if(WIN32)
 		"wsock32"
 		"ws2_32"
 		"winmm")
-	
+
 	if(MSVC)
 		list(APPEND system_libs
 			"delayimp"
@@ -266,7 +266,7 @@ set_target_properties(ortp PROPERTIES
 	COMPILE_DEFINITIONS "${definitions}"
 	INTERFACE_COMPILE_DEFINITIONS "${interface_definitions}"
 	INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/include;${CMAKE_CURRENT_BINARY_DIR}"
-	SO_VERSION ${ORTP_MAJOR_VERSION}
+	SOVERSION ${ORTP_MAJOR_VERSION}
 	VERSION ${ORTP_VERSION}
 	)
 target_link_libraries(ortp ${system_libs})
