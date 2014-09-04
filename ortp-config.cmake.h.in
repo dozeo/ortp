@@ -107,28 +107,28 @@
 #define ORTP_MINOR_VERSION @ORTP_MINOR_VERSION@
 
 /* ortp version number */
-#define ORTP_VERSION @ORTP_VERSION@
+#define ORTP_VERSION "@ORTP_VERSION@"
 
 /* Name of package */
-#define PACKAGE @PACKAGE@
+#define PACKAGE "@PACKAGE@"
 
 /* Define to the address where bug reports for this package should be sent. */
-#define PACKAGE_BUGREPORT @PACKAGE_BUGREPORT@
+#define PACKAGE_BUGREPORT "@PACKAGE_BUGREPORT@"
 
 /* Define to the full name of this package. */
-#define PACKAGE_NAME @PACKAGE_NAME@
+#define PACKAGE_NAME "@PACKAGE_NAME@"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING @PACKAGE_STRING@
+#define PACKAGE_STRING "@PACKAGE_STRING@"
 
 /* Define to the one symbol short name of this package. */
-#define PACKAGE_TARNAME @PACKAGE_TARNAME@
+#define PACKAGE_TARNAME "@PACKAGE_TARNAME@"
 
 /* Define to the home page for this package. */
-#define PACKAGE_URL @PACKAGE_URL@
+#define PACKAGE_URL "@PACKAGE_URL@"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION @PACKAGE_VERSION@
+#define PACKAGE_VERSION "@PACKAGE_VERSION@"
 
 /* Defines the periodicity of the rtp scheduler in microseconds */
 #define POSIXTIMER_INTERVAL @POSIXTIMER_INTERVAL@
@@ -140,7 +140,7 @@
 #cmakedefine TIME_WITH_SYS_TIME 1
 
 /* Version number of package */
-#define VERSION @@PACKAGE_VERSION@
+#define VERSION "@PACKAGE_VERSION@"
 
 /* Define WORDS_BIGENDIAN to 1 if your processor stores words with the most
    significant byte first (like Motorola and SPARC, unlike Intel). */
@@ -150,19 +150,19 @@
 # endif
 #else
 # ifndef WORDS_BIGENDIAN
-#  undef WORDS_BIGENDIAN
+#cmakedefine WORDS_BIGENDIAN
 # endif
 #endif
 
 /* Apple wants you to declare what behavior you want by defining either
    __APPLE_USE_RFC_2292 */
-#undef __APPLE_USE_RFC_2292
+#cmakedefine __APPLE_USE_RFC_2292
 
 /* Define to empty if `const' does not conform to ANSI C. */
-#define const @CONST_ANCI_C@
+#cmakedefine const
 
 /* Define to `__inline__' or `__inline' if that's what the C compiler
    calls it, or to nothing if 'inline' is not supported under any name.  */
 #ifndef __cplusplus
-#define inline @COMPILER_INLINE@
+#cmakedefine inline @COMPILER_INLINE@
 #endif
